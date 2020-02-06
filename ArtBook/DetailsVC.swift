@@ -11,16 +11,22 @@ import CoreData
 
 class DetailsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var artistText: UITextField!
     @IBOutlet weak var yearText: UITextField!
     
+    var chosenPainting = ""
+    var chosenPaintingID : UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if chosenPainting != "" {
+            //CoreData
+            
+            
+        }
         
         // Recognizer
         
@@ -57,8 +63,12 @@ class DetailsVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             try context.save()
             print("saved")
         } catch {
-            print("Error accoured")
+            print("Error saving")
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newData"), object: nil)
+        
+        self.navigationController?.popViewController(animated: true)
         
     }
     
